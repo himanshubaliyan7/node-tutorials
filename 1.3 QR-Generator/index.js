@@ -9,7 +9,7 @@ inquirer
     {
       type: 'input',
       name: 'value',
-      message: 'Enter QR Value: ',
+      message: 'Type in your URL:',
       default: 'QR Code'
     }
   ])
@@ -17,6 +17,11 @@ inquirer
     const url = answers.value;
     var qr_svg = qr.image(url);
     qr_svg.pipe(fs.createWriteStream(`qr_img.png`));
+
+    fs.writeFile('URL.txt', url, (err) => {
+      if(err) throw err;
+      console.log('URL saved!');
+    });
   });
 
 
